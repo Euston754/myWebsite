@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fff0f3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e496a4;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff4d6d;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 200px;
+            flex-wrap: wrap;
+            min-height: 100px;
+        }
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            z-index: 10;
+        }
+        #noBtn {
+            background-color: #030303;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #success-message {
+            display: none;
+        }
+        .gif-container img {
+            width: 250px;
+            border-radius: 20px;
+            margin-bottom: 0%;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div id="quiz-container" class="container">
+        <div class="gif-container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGdjbG55N3ZpYzhzaTFjcGF3cXpsaDU2NmFhdXNvMXkxMWJ2a3ZmciZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7a5EmLIyDjd2kiXYqK/giphy.gif" alt="Cute heart">
+        </div>
+        <h1>Will you be my Valentine? ❤️</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn" onclick="celebrate()">Yes</button>
+            <button id="noBtn" onclick="makeYesBigger()">No</button>
+        </div>
+    </div>
+
+    <div id="success-message" class="container">
+        <div class="gif-container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjQ0MnhvZzh5c2lhbmcycHhiamNlbGJuaXI1eTNqODVxZ3ZwMHQ3eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7y4Nc95399hsr24oYc/giphy.gif" alt="Happy dance">
+        </div>
+
+        <h1 style="font-size: 1.5rem;">SEE I KNEW IT, YOU COULDN'T REFUSE, you were just messing around!</h1>
+        <p style="font-size: 1.5rem; color: #ff4d6d;">I love you! ❤️</p>
+
+        <div class="gif-container" style = "display:flex; justify-content: flex-end;"> 
+            <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NnNtZ3dlOTk1NHJoM3R6ZGRoeXk5dTN3OHVkZWphNDMzOXczaHRvZyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/AAmXHAfy3WT6iTjDy6/giphy.gif" alt="Happy dance" style="width: 150px; height: 150px;">
+        </div>
+
+         <div class="gif-container" style = "display:flex; justify-content: left;"> 
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOW1sdm11MGhuZnp2aGdmaWtvbTB5MWVoMG1zZnJkZHBkeTZkMTU0aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3rgXBxX4myufzT6N2w/giphy.gif" alt="Happy dance" style="width: 75px; height: 75px;">
+        </div>
+    </div>
+
+    <script>
+        let yesScale = 1;
+        const noPhrases = [
+            "No, I thought it was supposed to be an Immediate yes", 
+            "You better be joking Jess?", 
+            "Haiya basi lemme bribe you na a husky.", 
+            "Hadi husky hutaki, Jess you are mean", 
+            "What if I tell you that you are the most beautiful girl", 
+            "Gai, hadi hiyo hutaki kuskia, NOOOOOOOOOO", 
+            "Alright I give up you win,", 
+            "Sike, lazima ukubali there is no way out for you", 
+            "See you have only one option", 
+            "Damn you really are sturborn", 
+            "Have a heart, Jess, I will cry if you continue with declining my request", 
+            "Don't be so cold, alright anything you want I'll buy", 
+            "LOL, YOU THOUGHT I WOULD ALLOW YOU TO REACH THIS FAR", 
+            "POOKIE ACCEPT", 
+            "Is that your final answer?", 
+            "You're breaking my heart ;("
+        ];
+        let phraseIndex = 0;
+
+        function makeYesBigger() {
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            
+            // Increase the scale of the Yes button
+            yesScale += 0.8;
+            yesBtn.style.transform = `scale(${yesScale})`;
+            
+            // Update No button text
+            noBtn.innerText = noPhrases[phraseIndex % noPhrases.length];
+            phraseIndex++;
+
+            // Move the No button slightly so it doesn't get covered immediately
+            if (yesScale > 2) {
+                noBtn.style.position = 'relative';
+                noBtn.style.left = `${Math.random() * 20 - 10}px`;
+            }
+        }
+
+        function celebrate() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+            confettiEffect();
+        }
+
+        // Simple background color flash for extra flair
+        function confettiEffect() {
+            document.body.style.backgroundColor = "#ffb3c1";
+            setTimeout(() => {
+                document.body.style.backgroundColor = "#fff0f3";
+            }, 500);
+        }
+    </script>
+</body>
+</html>
